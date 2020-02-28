@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import GetStarted from './GetStarted'
-import api from '../../api'
+import ItemSearch from './ItemSearch'
 
 const textWindowTitle = '// TRY ME!'
 const textAlert = 'NOTE: Only hebrew text is supported!'
@@ -19,15 +19,8 @@ const renderAlert = (status, setStatus) => {
     )
 }
 
-const makeQuery = async (e, query, setQuery) => {
-    setQuery(e.target.value)
-    const req = await api.post(query)
-    console.log(req)
-}
-
 const TryMeWindow = () => {
     const [alertSeen, setAlertSeen] = useState(false)
-    const [query, setQuery] = useState(null)
 
     return(
         <div className="try-me">
@@ -41,10 +34,10 @@ const TryMeWindow = () => {
                             </span>
                         </div>
                         <div className="window-content">
-                                <div className="demo-container">   
-                                    <input type="text" placeholder="Enter item name e.g. במבה" onChange={(e) => makeQuery(e, query, setQuery)}/>
+                                <div className="demo-container"> 
+                                    <ItemSearch/>  
                                         {renderAlert(alertSeen, setAlertSeen)}
-                                    <div className="search-results"></div>
+
                                 </div>
                         </div>
                     </div>
