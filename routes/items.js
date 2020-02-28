@@ -16,10 +16,18 @@ itemRouter.post('/lookup', utils.catchAsync(async (req, res) => { // POST {q: <s
         json: true
     }
 
-    
-     const results = (await rp(supersalSearchOptions)).results || [];
 
-      res.json(results.map(r => r.name));
+    const results = (await rp(supersalSearchOptions)).results || [];
+
+    const formattedResults = results.map(r => ({
+        name: r.name,
+        description: r.description,
+        price: r.price.value,
+        img: r.baseProductImageMedium,
+        size: r.unitDescription
+    })).sort((a, b) => a.name > b.name ? 1 : -1);
+
+    res.json(formattedResults);
 }));
 
 
