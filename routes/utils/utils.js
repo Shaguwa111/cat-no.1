@@ -1,4 +1,5 @@
 const Ajv = require('ajv');
+const rp = require('request-promise');
 
 exports.catchAsync = (fn) => {
     return async (req, res, next) => {
@@ -11,7 +12,7 @@ exports.catchAsync = (fn) => {
 }
 
 
-exports.validateAndSend = async (schema, data, db) => {
+exports.validate = async (schema, data) => {
     const ajv = new Ajv();
     let valid;
     try {
@@ -22,7 +23,22 @@ exports.validateAndSend = async (schema, data, db) => {
         throw new Error(err)
     }
 
+    if (!valid) {
+        throw new Error('schema isn\'t valid')
+    }
 
-
-    return console.log(valid, 'now sending to db')
+    return valid
 }
+
+
+exports.retreiveData = async (uri, res) => {
+    const data = await rp({
+        method: 'GET',
+        uri: uri,
+        json: true // Automatically stringifies the body to JSON
+    });
+    for (let id in data) {
+        data[id]._id = id;
+    }
+    res.json(data);
+} 
