@@ -42,3 +42,27 @@ exports.retreiveData = async (uri, res) => {
     }
     res.json(data);
 } 
+
+exports.format = (data) => {
+    for (let id in data) {
+        data[id]._id = id;
+    }
+
+    const values = Object.values(data || {});
+    return itemFormatted(values, true)
+}
+
+const itemFormatted = (data, isArray = false) => {
+    if (!data) return isArray ? [] : {};
+    const formattedItems = (items) => {
+        for (let id in items) {
+            items[id]._id = id;
+        }
+    return Object.values(items || {});
+    }
+ if (!isArray) return {...data, items: formattedItems(data.items)};
+ return data.map(d => ({...d, items: formattedItems(d.items)}));
+ 
+}
+
+exports.itemFormatted = itemFormatted;
