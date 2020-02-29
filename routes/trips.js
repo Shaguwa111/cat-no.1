@@ -33,7 +33,7 @@ const itemSchema = {
 const tripSchema = {
     properties: {
         createdAt: {type: 'number'},
-        userId: { type: 'string' },
+        userId: { type: ['string', 'number'] },
         name: { type: 'string' },
     }, required: ['userId', 'name']
 }
