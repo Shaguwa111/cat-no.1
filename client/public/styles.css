@@ -186,8 +186,7 @@ footer {
     margin-top: 15px;
     margin-bottom: 15px;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -1079,4 +1078,12 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+.sign-out {
+    background-color: #bbb !important;
+}
+
+.sign-out:hover {
+    background-color: #f44336 !important;
 }

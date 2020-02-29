@@ -1,6 +1,8 @@
-//? The page with a list of all of the Trips the user has created thus far
-//? User can open and view trips, create a new trip
 import React from 'react'
+import { connect } from 'react-redux'
+import { createNewTrip } from '../state/actions'
+
+//*local imports
 import { ReactComponent as PlusSignSVG } from '../resources/plus.svg' 
 import Modal from './components/Modal'
 import useModal from './components/hooks/useModal'
@@ -8,7 +10,7 @@ import useModal from './components/hooks/useModal'
 const textPageTitle = 'My Trips'
 const textNewTrip = 'New Trip'
 
-const MyTrips = () => {
+const MyTrips = (props) => {
     const {isShowing, toggle} = useModal()
 
     return(
@@ -18,6 +20,7 @@ const MyTrips = () => {
             hide={toggle}
             modalTitle="New trip"
             userAction="CREATE_TRIP"
+            onSubmit={props.createNewTrip}
             />
             <div className="page-background">
                 <div className="page-container">
@@ -46,4 +49,4 @@ const MyTrips = () => {
     )
 }
 
-export default MyTrips
+export default connect(null, { createNewTrip })(MyTrips)

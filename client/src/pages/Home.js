@@ -5,7 +5,6 @@ import Introduction from './components/Introduction'
 const Home = () => {
     return(
             <div className="page">
-                <TryMeWindow/>
                 <Introduction/>
             </div>
     )

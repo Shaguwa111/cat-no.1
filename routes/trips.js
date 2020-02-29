@@ -23,8 +23,10 @@ const itemSchema = {
     properties: {
         title: { type: 'string' },
         price: { type: 'number' },
-        amount: { type: 'number' }
-    }, required: ['title', 'price', 'amount']
+        amount: { type: 'number' },
+        imageUrl: { type: 'string'},
+        productUrl: { type: 'string'}
+    }, required: ['title', 'price', 'amount', 'imageUrl', 'productUrl']
 };
 
 
@@ -32,7 +34,6 @@ const tripSchema = {
     properties: {
         userId: { type: 'string' },
         name: { type: 'string' },
-        // items: { type: 'array', items: itemSchema, default: [] }
     }, required: ['userId', 'name']
 }
 

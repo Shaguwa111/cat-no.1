@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import GoogleAuth from './GoogleAuth'
 
 const textLogo = 'TealDeal'
 const textHome = 'Home'
@@ -31,9 +32,7 @@ const Header = () => {
                 <li><Link  to="/lookup">
                     {textLookup}
                 </Link></li>
-                <button>
-                    {textLogin}
-                </button>
+                <GoogleAuth />
             </ul>
         </header>
     )

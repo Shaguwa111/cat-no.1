@@ -59,7 +59,7 @@ const handleModalBodyRender = (userAction) => {
     }
 }
 
-const handleModalFooterRender = (userAction, hide) => {
+const handleModalFooterRender = (userAction, hide, onSubmit) => {
     switch (userAction) {
         case 'DELETE_TRIP':
             return(
@@ -84,7 +84,7 @@ const handleModalFooterRender = (userAction, hide) => {
                     >
                         Cancel
                     </button>
-                    <button className="trip-button order">
+                    <button className="trip-button order" onClick={onSubmit}>
                         Continue
                     </button>
                 </React.Fragment>
@@ -98,7 +98,7 @@ const handleModalFooterRender = (userAction, hide) => {
     }
 }
 
-const Modal = ({ isShowing, hide, userAction }) => isShowing ? ReactDOM.createPortal(
+const Modal = ({ isShowing, hide, userAction, onSubmit }) => isShowing ? ReactDOM.createPortal(
     <React.Fragment>
         <div className="modal-overlay">
             <div className="modal-wrapper" onClick={hide}>
@@ -110,7 +110,7 @@ const Modal = ({ isShowing, hide, userAction }) => isShowing ? ReactDOM.createPo
                         {handleModalBodyRender(userAction)}
                     </div>
                     <div className="modal-footer">
-                        {handleModalFooterRender(userAction, hide)}
+                        {handleModalFooterRender(userAction, hide, onSubmit)}
                     </div>
                 </div>
             </div>
