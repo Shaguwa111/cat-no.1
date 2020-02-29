@@ -3,6 +3,7 @@ const rp = require('request-promise');
 
 exports.catchAsync = (fn) => {
     return async (req, res, next) => {
+        req.userId = req.headers['user-id'] || '';
         try {
             await fn(req, res, next);
         } catch (error) {

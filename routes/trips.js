@@ -32,6 +32,7 @@ const itemSchema = {
 
 const tripSchema = {
     properties: {
+        createdAt: {type: 'number'},
         userId: { type: 'string' },
         name: { type: 'string' },
     }, required: ['userId', 'name']
@@ -39,7 +40,7 @@ const tripSchema = {
 
 
 tripRouter.post('/', utils.catchAsync(async (req, res) => { 
-    const body = req.body;
+    const body = {...req.body, userId: req.userId, createdAt: Date.now()};
     await utils.validate(tripSchema, body);
     const id = await db.ref('/trips').push().key
     await db.ref(`/trips/${id}`).set(body);
@@ -53,7 +54,7 @@ tripRouter.post('/', utils.catchAsync(async (req, res) => {
 tripRouter.delete('/:id', utils.catchAsync(async (req, res) => {
     const id = req.params.id;
     await db.ref(`/trips/${id}`).remove();
-    const snapshot = await db.ref('/trips').once('value')
+    const snapshot = await db.ref('/trips').orderByChild("userId").equalTo(req.userId).once('value')
     const data = utils.format(snapshot.val());
 
     res.json(data)
@@ -73,7 +74,8 @@ tripRouter.put('/:id', utils.catchAsync(async (req, res) => { // for changing na
 
 
 tripRouter.get('/', utils.catchAsync(async (req, res) => {
-    const snapshot = await db.ref('/trips').once('value')
+    const userId = req.userId;
+    const snapshot = await db.ref('/trips').orderByChild("userId").equalTo(userId).once('value')
     const data = utils.format(snapshot.val());
 
     res.json(data)

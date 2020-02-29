@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { signIn, signOut } from '../../state/actions'
+import api from '../../api';
 
 class GoogleAuth extends React.Component {
     componentDidMount() {
@@ -19,8 +20,10 @@ class GoogleAuth extends React.Component {
 
     onAuthChange = (isSignedIn) => {
         console.log(this.auth.currentUser.get())
+      
         if (isSignedIn) {
             this.props.signIn(this.auth.currentUser.get().getId())
+            api.userId = this.auth.currentUser.get().getId();
         } else {
             this.props.signOut()
         }
