@@ -21,12 +21,12 @@ const tripRouter = express.Router();
 
 const itemSchema = {
     properties: {
-        title: { type: 'string' },
+        name: { type: 'string' },
         price: { type: 'number' },
-        amount: { type: 'number' },
-        imageUrl: { type: 'string'},
-        productUrl: { type: 'string'}
-    }, required: ['title', 'price', 'amount', 'imageUrl', 'productUrl']
+        quantity: { type: 'number' },
+        img: { type: 'string'},
+        size: { type: 'string'}
+    }, required: ['name', 'price', 'size', 'quantity', 'img']
 };
 
 
