@@ -24,7 +24,8 @@ itemRouter.post('/lookup', utils.catchAsync(async (req, res) => { // POST {q: <s
         description: r.description,
         price: r.price.value,
         img: r.baseProductImageMedium,
-        size: r.unitDescription
+        size: r.unitDescription,
+        quantity: 1
     })).sort((a, b) => a.name > b.name ? 1 : -1);
 
     res.json(formattedResults);
