@@ -131,5 +131,41 @@ tripRouter.put('/:tripId/item/:id', utils.catchAsync(async (req, res) => {
     res.json(utils.itemFormatted(data));
 }));
 
+tripRouter.put('/:tripId/item/:id/plusone', utils.catchAsync(async (req, res) => {
+    const id = req.params.id;
+    const tripId = req.params.tripId;
+
+   await db.ref(`/trips/${tripId}/items/${id}/quantity`).transaction((item) => {
+       return item + 1
+    }, null, true)
+   const snapshot = await db.ref(`/trips/${tripId}`).once('value');
+    const data = snapshot.val();
+    if (data) data._id = tripId;
+
+    res.json(utils.itemFormatted(data));
+}));
+
+tripRouter.put('/:tripId/item/:id/minusone', utils.catchAsync(async (req, res) => {
+    const id = req.params.id;
+    const tripId = req.params.tripId;
+
+   await db.ref(`/trips/${tripId}/items/${id}`).transaction((item) => {
+       if (item !== null) {
+            if (item.quantity > 0) {
+            item.quantity = item.quantity - 1
+       } else {
+           item = null;  
+       }
+       }
+         return item
+       
+    }, null, true)
+   const snapshot = await db.ref(`/trips/${tripId}`).once('value');
+    const data = snapshot.val();
+    if (data) data._id = tripId;
+
+    res.json(utils.itemFormatted(data));
+}));
+
 module.exports = tripRouter;
 
