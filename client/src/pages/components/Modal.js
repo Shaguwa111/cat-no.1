@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
+import GoogleAuth from './GoogleAuth'
 
 const handleModalHeaderRender = (userAction) => {
     switch (userAction) {
@@ -23,6 +24,14 @@ const handleModalHeaderRender = (userAction) => {
         case 'CHECKOUT': 
                 return(
                     <div></div>
+                )
+        case 'LOGIN_WARNING':
+                return(
+                    <React.Fragment>
+                        <span>
+                            NOTE
+                        </span>
+                    </React.Fragment>
                 )
         default:
             return null
@@ -54,6 +63,14 @@ const handleModalBodyRender = (userAction, localState) => {
         case 'CHECKOUT': 
                 return(
                     <div></div>
+                )
+        case 'LOGIN_WARNING':
+                return(
+                    <React.Fragment>
+                        <span className="modal-form-text">
+                            Please sign in to view your trips
+                        </span>
+                    </React.Fragment>
                 )
         default:
             return null
@@ -94,6 +111,18 @@ const handleModalFooterRender = (userAction, hide, onSubmit, localState, dispatc
                 return(
                     <div></div>
                 )
+        case 'LOGIN_WARNING':
+            return(
+                <React.Fragment>
+                    <button 
+                    className="trip-button delete" 
+                    onClick={hide}
+                    >
+                        Cancel
+                    </button>
+                    <GoogleAuth version="pretty" action={hide}/>
+                </React.Fragment>
+            )
         default:
             return null
     }

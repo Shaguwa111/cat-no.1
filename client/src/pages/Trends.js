@@ -10,7 +10,7 @@ const Trends = () => {
                 </div>
 
                 <div className="mytrips-content">
-
+                    
             </div>
         </div>
     </div>

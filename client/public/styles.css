@@ -31,7 +31,7 @@ header {
     padding: 10px 6%;
 }
 
-header button {
+.google-auth {
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -42,6 +42,19 @@ header button {
     cursor: pointer;
     transition: all 0.3s ease 0s;
     margin-left: 15px;
+}
+
+.google-auth-pretty {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.google-svg {
+    margin-left: 6px;
+    height: 20px;
+    width: 20px;
 }
 
 ul {
@@ -62,6 +75,19 @@ ul li a:hover {
 }
 
 ul li a:focus {
+    color: #1baeae;
+}
+
+.mytrips-nav {
+    transition: all 0.1s ease 0s;
+}
+
+.mytrips-nav:hover {
+    color: #1baeae;
+    cursor: pointer;
+}
+
+.mytrips-nav:focus {
     color: #1baeae;
 }
 
@@ -525,6 +551,109 @@ footer {
     background: #5AC05A;
 }
 
+.lookup-section {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.lookup-search-section {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lookup-input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lookup-input button {
+    font-size: 22px;
+    color: white;
+    background: #bbb;
+    border: none;
+    padding: 15px 10px;
+    border-radius: 4px;
+    width: 10%;
+}
+
+.active {
+    background: #1baeae !important;
+    cursor: pointer;
+}
+
+.lookup-input input {
+    font-size: 16px;
+    margin-right: 15px;
+    color: white;
+    width: 25%;
+    line-height: 1.5;
+    padding: 15px 10px;
+    border: 1px solid #212f3d;
+    background: #212f3d;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.lookup-input input:focus {
+    transform: scale(1.04);
+}
+
+.lookup-input input::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.lookup-results-grid {
+    width: 90%;
+    height: 100%;
+    margin: 10px;
+    display: grid;
+    justify-items: start;
+    align-content: start;
+    grid-template-columns: repeat(5, 1fr);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.item-tile {
+    border-radius: 4px;
+    height: 200px;
+    width: 200px;
+    background-color: skyblue;
+    transition: ease 0.2s;
+}
+
+.item-tile:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+}
+
+.item-tile-header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #212f3d;
+}
+
+.item-tile-body img {
+    flex: 3;
+    height: 100px;
+}
+
+.item-tile-details {
+    flex: 1;
+}
+
 .demo-container {
     width: 85%;
     margin: 0 auto;
@@ -701,6 +830,32 @@ footer {
 .back-button {
     color: white;
     background-color: #bbb;
+}
+
+.previous-page-button {
+    height: 60%;
+    border-radius: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+    padding: 0 10px;
+    color: #bbb;
+    transition: all 0.2s ease 0s;
+}
+
+.previous-page-button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #f44336;
+    transform: scale(1.04);
+}
+
+.arrow-svg {
+    margin-left: 4px;
+    height: 36px;
+    width: 36px;
 }
 
 .delete {
@@ -1000,6 +1155,25 @@ footer {
     border: none;
     box-sizing: border-box;
     outline: none;
+}
+
+.lookup-input input {
+    font-size: 16px;
+    margin-right: 25px;
+    color: white;
+    width: 25%;
+    line-height: 1.5;
+    padding: 15px 10px;
+    border: 1px solid #212f3d;
+    background: #212f3d;
+    border-radius: 4px;
+    transition: 0.2s;
+
+}
+
+.lookup-input input::placeholder {
+    color: white;
+    opacity: 1;
 }
 
 .auto-complete ul {

@@ -3,6 +3,7 @@ import moment from 'moment'
 import API from '../../../api'
 import history from '../../History'
 import TripTile from '../TripTile'
+import ItemTile from '../ItemTile'
 import Item from '../Item'
 
 //*Redirect user to home page
@@ -143,4 +144,53 @@ export const renderFilterMessage = () => {
 //*Redirect user to the trip they wish to view
 export const redirectToTrip = (id) => {
     history.push('/trip/' + id)
+}
+
+//*Redirect user to the My Trips page 
+export const redirectToTrips = () => {
+    history.push('/mytrips')
+}
+
+//*Fetch search results from api for Lookup page
+export const fetchLookupResults = async (query, setResults) => {
+    if (query.length > 1) {
+        const response = await API.post('/item/lookup', {
+            q: query
+        })
+
+        setResults(response.data)
+    }
+}
+
+//*Handle lookup search input
+export const handleLookupSubmit = (query, setResults) => {
+    if (query) {
+        fetchLookupResults(query, setResults)
+    }
+}
+
+//*Render search results from the Lookup page
+export const renderLookupResults = (results) => {
+    if (!results || !results.length) return null
+    console.log(results)
+    return results.map((result) => {
+        console.log(result)
+        return <ItemTile item={result}/>
+    })
+}
+
+//*Render Lookup search button depending on input
+export const renderLookupButton = (query, onSubmit, setResults) => {
+    if (query) {
+        return <button className="lookup-input-button active" onClick={() => onSubmit(query, setResults)}>Search</button>
+    } else {
+        return <button className="lookup-input-button" onClick={() => onSubmit(query, setResults)}>Search</button>
+    }
+}
+
+//*Render item and its information after being clicked on
+export const renderSelectedItem = () => {
+    return(
+        <div>ITEM HERE</div>
+    )
 }
