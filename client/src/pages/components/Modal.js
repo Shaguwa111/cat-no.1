@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { useDispatch } from 'react-redux'
 
 const handleModalHeaderRender = (userAction) => {
     switch (userAction) {
@@ -28,7 +29,7 @@ const handleModalHeaderRender = (userAction) => {
     }
 }
 
-const handleModalBodyRender = (userAction) => {
+const handleModalBodyRender = (userAction, localState) => {
     switch (userAction) {
         case 'DELETE_TRIP':
             return(
@@ -44,7 +45,7 @@ const handleModalBodyRender = (userAction) => {
                     <span className="modal-form-text">
                         Name your new trip
                     </span> 
-                    <input
+                    <input value={localState.tripName} onChange={(e) => localState.setTripName(e.target.value)}
                         className="modal-form-input"
                         placeholder="A name related to the trip's purpose, e.g. Breakfast"
                     />
@@ -59,7 +60,7 @@ const handleModalBodyRender = (userAction) => {
     }
 }
 
-const handleModalFooterRender = (userAction, hide, onSubmit) => {
+const handleModalFooterRender = (userAction, hide, onSubmit, localState, dispatch, extraInfo) => {
     switch (userAction) {
         case 'DELETE_TRIP':
             return(
@@ -70,7 +71,7 @@ const handleModalFooterRender = (userAction, hide, onSubmit) => {
                     >
                         Cancel
                     </button>
-                    <button className="trip-button delete">
+                    <button className="trip-button delete" onClick={() => dispatch(onSubmit(extraInfo.id))}>
                         Continue
                     </button>
                 </React.Fragment>
@@ -84,7 +85,7 @@ const handleModalFooterRender = (userAction, hide, onSubmit) => {
                     >
                         Cancel
                     </button>
-                    <button className="trip-button order" onClick={onSubmit}>
+                    <button className="trip-button order" onClick={() => dispatch(onSubmit(localState.tripName))}>
                         Continue
                     </button>
                 </React.Fragment>
@@ -98,24 +99,32 @@ const handleModalFooterRender = (userAction, hide, onSubmit) => {
     }
 }
 
-const Modal = ({ isShowing, hide, userAction, onSubmit }) => isShowing ? ReactDOM.createPortal(
-    <React.Fragment>
-        <div className="modal-overlay">
-            <div className="modal-wrapper" onClick={hide}>
-                <div className="modal" onClick={e => e.stopPropagation()}>
-                    <div className="modal-header">
-                        {handleModalHeaderRender(userAction)}
-                    </div>
-                    <div className="modal-body">
-                        {handleModalBodyRender(userAction)}
-                    </div>
-                    <div className="modal-footer">
-                        {handleModalFooterRender(userAction, hide, onSubmit)}
+const Modal = ({ isShowing, hide, userAction, onSubmit, localState, extraInfo }) => {
+    const dispatch = useDispatch()
+
+    if (isShowing) {
+        return ReactDOM.createPortal(
+            <React.Fragment>
+                <div className="modal-overlay">
+                    <div className="modal-wrapper" onClick={hide}>
+                        <div className="modal" onClick={e => e.stopPropagation()}>
+                            <div className="modal-header">
+                                {handleModalHeaderRender(userAction)}
+                            </div>
+                            <div className="modal-body">
+                                {handleModalBodyRender(userAction, localState)}
+                            </div>
+                            <div className="modal-footer">
+                                {handleModalFooterRender(userAction, hide, onSubmit, localState, dispatch, extraInfo)}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </React.Fragment>, document.body
-) : null
+            </React.Fragment>, document.body
+        )
+    } else {
+        return null
+    }
+}
 
 export default Modal

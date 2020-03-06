@@ -1,52 +1,65 @@
-import React, { useState, useEffect, selected } from 'react'
-import useModal from './hooks/useModal'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useSummary } from './hooks'
+import { useModal } from './hooks'
+import { deleteTrip } from '../../state/actions'
 import Modal from './Modal'
 
-const calculateSubTotal = (list) => {
-    if (!list) return 0
-    return list.reduce((acc, cv) => {
-        return acc + parseFloat(cv.itemPrice)
-    }, 0)
-}
-
-const calculateVAT = (subtotal) => {
-    console.log(subtotal)
-    return subtotal * 0.17
-}
-
-const calculateTotal = (subtotal, vat) => {
-    return subtotal + vat
-}
-
-const TripSummary = ({tripItems}) => {
+const TripSummary = ({ id }) => {
     const {isShowing, toggle} = useModal()
-    const [items] = useState(tripItems)
-    const [subTotal, setSubTotal] = useState(0)
+    const dispatch = useDispatch()
+    const summary = useSummary(id)
+    const labels = {
+        vat: 'VAT: ',
+        subTotal: 'Subtotal: ',
+        total: 'Total: ',
+        deleteButton: 'Delete trip',
+        'orderButton': 'Place order'
+    }
 
-    useEffect(() => {
-        setSubTotal(calculateSubTotal(items))
-    }, [])
-    
+    if (!summary || summary === {}) return null
+
     return(
         <div className="trip-summary">
+        
             <Modal
                 isShowing={isShowing}
                 hide={toggle}
                 userAction="DELETE_TRIP"
+                dispatch={dispatch}
+                onSubmit={deleteTrip}
+                extraInfo={{ id }}
             />
+
             <div className="trip-totals labels">
-                <div className="total-vat">VAT: </div>
-                <div className="trip-subtotal">Subtotal: </div>
-                <div className="total">Total: </div>
+                <div className="total-vat">
+                    {labels.vat}
+                </div>
+                <div className="trip-subtotal">
+                    {labels.subTotal}
+                </div>
+                <div className="total">
+                    {labels.total}
+                </div>
             </div>
             <div className="trip-totals amounts">
-                <div className="total-vat">{`₪ ${calculateVAT(subTotal).toFixed(2)}`}</div>
-                <div className="trip-subtotal">{`₪ ${subTotal.toFixed(2)}`}</div>
-                <div className="total">{`₪ ${calculateTotal(subTotal, calculateVAT(subTotal)).toFixed(2)}`}</div>
+                <div className="total-vat">
+                    {`₪ ${summary.vat}`}
+                </div>
+                <div className="trip-subtotal">
+                    {`₪ ${summary.subTotal}`}
+                </div>
+                <div className="total">
+                    {`₪ ${summary.total}`}
+                </div>
             </div>
             <div className="trip-savings">
-                <button className="trip-button delete" onClick={toggle}>Delete trip</button>
-                <button className="trip-button order">Place order</button>
+                <button className="trip-button delete" onClick={toggle}>
+                    {labels.deleteButton}
+                </button>
+                <button className="trip-button order">
+                    {labels.orderButton}
+                </button>
             </div>
         </div>
     )

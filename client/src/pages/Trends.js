@@ -5,13 +5,15 @@ const Trends = () => {
     return(
         <div className="page-background">
             <div className="page-container">
-            <div className="page-header">
-            <h3 className="page-header-text">Trends</h3>
-        </div>
-        <div className="mytrips-content">
-        </div>
+                <div className="page-header">
+                    <h3 className="page-header-text">Trends</h3>
+                </div>
+
+                <div className="mytrips-content">
+
             </div>
         </div>
+    </div>
     )
 }
 
