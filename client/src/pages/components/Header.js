@@ -20,9 +20,9 @@ const Header = () => {
             </Link>
 
             <ul>
-                <li><Link  to="/">
+                {/* <li><Link  to="/">
                     {textHome}
-                </Link></li>
+                </Link></li> */}
                 <li><Link  to="/trends">
                     {textTrends}
                 </Link></li>

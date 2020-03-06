@@ -9,7 +9,6 @@ import Modal from './Modal'
 const TripTile = ({ trip }) => {
     const {toggle, isShowing} = useModal()
     const dispatch = useDispatch()
-
     return(
         <React.Fragment>
         <Modal
@@ -28,7 +27,7 @@ const TripTile = ({ trip }) => {
                 <span>
                     {displayDate(trip.createdAt)}
                 </span>
-                <DeleteTripSVG className="trip-tile-delete-svg" onClick={(e) => {
+                <DeleteTripSVG className="trip-tile-delete-svg" style={{fill: 'red !important'}} onClick={(e) => {
                     e.stopPropagation()
                     toggle()
                 }}/>

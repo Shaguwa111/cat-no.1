@@ -13,7 +13,6 @@ export const redirectHome = () => {
 //*Render a trip tile for every trip the user has
 export const renderTripTiles = (trips) => {
     if (!trips || !trips.length) return null
-
     return trips.map((trip) => {
         return <TripTile
             key={trip._id}
@@ -73,7 +72,7 @@ export const renderSearchSuggestions = (suggestions, setSuggestions, setUserInpu
 
 //*Parse and render item size/weight
 export const renderItemSize = (rawText) => {
-    if (!rawText) return undefined 
+    if (!rawText) return '' 
 
     const splitText = rawText.split(' ')
     let num, label
@@ -119,6 +118,7 @@ export const calculateTotal= (trip) => {
 
 //*Display long strings in confined spaces
 export const displayLongString = (str) => {
+    if (!str) return ''
     if (str.length > 13) {
         const modifiedStr = str.slice(0, 19)
         return '...' + modifiedStr

@@ -16,6 +16,7 @@ const ItemDetails = ({ selectedItem, setSelectedItem }) => {
     return(
         <div className="details-container">
             <div className="item-details-container">
+                <div className="details">
                 <div className="details-labels">
                     <span className="details-name details-item">
                         {labels.itemName}
@@ -23,9 +24,9 @@ const ItemDetails = ({ selectedItem, setSelectedItem }) => {
                     <span className="details-price details-item">
                         {labels.itemPrice}
                     </span>
-                    <span className="details-size details-item">
+                    {selectedItem.size && <span className="details-size details-item">
                         {labels.itemSize}
-                    </span>
+                    </span>}
                     <span className="details-quantity details-item">
                         {labels.itemQuantity}
                     </span>
@@ -49,8 +50,9 @@ const ItemDetails = ({ selectedItem, setSelectedItem }) => {
                         <PlusSignSVG className="plusminus plus" onClick={() => setSelectedItem({...selectedItem, quantity: selectedItem.quantity + 1})}/>
                     </div>
                 </div>
-                <img className="item-preview" alt="item" src={selectedItem.img}/>
+                </div>
             </div>
+            <img className="item-preview" alt="item" src={selectedItem.img}/>
         </div>
     </div>
     )
