@@ -1,7 +1,9 @@
 import React from 'react'
+import { ReactComponent as GoogleSVG } from '../../resources/googleauth.svg'
 import { connect } from 'react-redux'
 import { signIn, signOut } from '../../state/actions'
 import api from '../../api';
+
 
 class GoogleAuth extends React.Component {
     componentDidMount() {
@@ -37,15 +39,23 @@ class GoogleAuth extends React.Component {
             return null
         }
         else if (this.props.isSignedIn) {
+            if (this.props.version === 'pretty') this.props.action()
             return(
-                <button onClick={this.onSignOutClick} className="sign-out">
+                <button onClick={this.onSignOutClick} className="google-auth sign-out">
                     Sign Out
                 </button>
             )
         }
         else {
+            if (this.props.version === 'pretty') {
+                return(
+                    <button className="google-auth google-auth-pretty" onClick={this.onSignInClick}>
+                        Sign in with <GoogleSVG class="google-svg"/>
+                    </button>
+                )
+            }
             return(
-                <button onClick={this.onSignInClick}>
+                <button className="google-auth" onClick={this.onSignInClick}>
                     Sign In
                 </button>
             )

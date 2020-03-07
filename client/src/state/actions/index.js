@@ -3,6 +3,8 @@ import API from '../../api'
 import history from '../../pages/History'
 
 export const signIn = (userId) => {
+    history.push('/mytrips')
+
     return {
         type: TYPES.SIGN_IN,
         payload: userId
@@ -10,6 +12,8 @@ export const signIn = (userId) => {
 }
 
 export const signOut = () => {
+    history.push('/')
+    
     return {
         type: TYPES.SIGN_OUT
     }
