@@ -44,13 +44,13 @@ exports.retreiveData = async (uri, res) => {
     res.json(data);
 } 
 
-exports.format = (data) => {
+exports.format = (data, withItems = true) => {
     for (let id in data) {
         data[id]._id = id;
     }
 
     const values = Object.values(data || {});
-    return itemFormatted(values, true)
+    return withItems ? itemFormatted(values, true) : values;
 }
 
 const itemFormatted = (data, isArray = false) => {

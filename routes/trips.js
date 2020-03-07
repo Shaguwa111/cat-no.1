@@ -5,16 +5,8 @@ const utils = require('./utils/utils');
 
 const firebase = require('firebase');
 
-const config = {
-    apiKey: "AIzaSyBht451wsFWpTxs6rcZQpz-LidUFTd-hXU",
-    databaseURL: "https://tealdeal.firebaseio.com",
-}
-
-firebase.initializeApp(config);
 
 const db = firebase.database();
-
-
 
 
 const tripRouter = express.Router();
