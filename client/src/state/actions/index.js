@@ -65,3 +65,7 @@ export const deleteTrip = (tripID) => async dispatch => {
     
     dispatch({ type: TYPES.DELETE_TRIP, payload: request.data})
 }
+
+export const trackItem = (item) => async dispatch => {
+    console.log(item)
+}

@@ -4,7 +4,11 @@ import API from '../../../api'
 import history from '../../History'
 import TripTile from '../TripTile'
 import ItemTile from '../ItemTile'
+import TrendChart from '../TrendChart'
 import Item from '../Item'
+import { ReactComponent as ClearQuerySVG } from '../../../resources/clear.svg'
+import LookupDetails from '../LookupDetails'
+import Tab from '../Tab'
 
 //*Redirect user to home page
 export const redirectHome = () => {
@@ -121,7 +125,7 @@ export const calculateTotal= (trip) => {
 //*Display long strings in confined spaces
 export const displayLongString = (str) => {
     if (str.length > 13) {
-        const modifiedStr = str.slice(0, 19)
+        const modifiedStr = str.slice(0, 18)
         return '...' + modifiedStr
     }
     return str
@@ -163,34 +167,63 @@ export const fetchLookupResults = async (query, setResults) => {
 }
 
 //*Handle lookup search input
-export const handleLookupSubmit = (query, setResults) => {
-    if (query) {
+export const handleLookupSubmit = (e, query, setResults) => {
+    if (e.key === 'Enter' && query) {
         fetchLookupResults(query, setResults)
     }
 }
 
 //*Render search results from the Lookup page
-export const renderLookupResults = (results) => {
+export const renderLookupResults = (results, setSelectedItem) => {
     if (!results || !results.length) return null
-    console.log(results)
     return results.map((result) => {
-        console.log(result)
-        return <ItemTile item={result}/>
+        return <ItemTile item={result} setSelectedItem={setSelectedItem}/>
     })
 }
 
 //*Render Lookup search button depending on input
-export const renderLookupButton = (query, onSubmit, setResults) => {
+export const renderClearQuery = (query, setInputValue) => {
     if (query) {
-        return <button className="lookup-input-button active" onClick={() => onSubmit(query, setResults)}>Search</button>
-    } else {
-        return <button className="lookup-input-button" onClick={() => onSubmit(query, setResults)}>Search</button>
+        return(
+            <ClearQuerySVG className="clear-query" onClick={() => setInputValue('')}/>
+        )
     }
+    return null
+}
+
+export const displaySearchHelper = () => {
+    return <div className="search-helper">Enter a query and press enter to search. Click on an item for more information.</div>
 }
 
 //*Render item and its information after being clicked on
-export const renderSelectedItem = () => {
+export const renderSelectedItem = (item) => {
     return(
-        <div>ITEM HERE</div>
+        <LookupDetails selectedItem={item}/>
     )
+}
+
+export const displayTrendsTutorial = (length) => {
+    console.log(length)
+    if (length) {
+        return <div className="trend-tutorial">Click on an item from the left side menu to display a trend!</div>
+    }
+    return <div className="trend-tutorial">You are not tracking any items. Sign in and lookup an item to get started!</div>
+}
+
+export const renderTrend = () => {
+    return(
+        <div className="chart-container">
+            <TrendChart/>
+        </div>
+    )
+}
+
+export const renderTabs = (items) => {
+    if (!items) return null
+
+    return items.map((item) => {
+        return(
+            <Tab item={item}/>
+        )
+    })
 }

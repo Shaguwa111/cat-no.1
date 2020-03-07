@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
-import { renderLookupButton} from './helpers'
+import { renderClearQuery, handleLookupSubmit} from './helpers'
 
-const LookupInput = ({ setResults, onSubmit }) => {
+const LookupInput = ({ setResults, onActive }) => {
     const [inputValue, setInputValue] = useState('')
-    const [selectedItem, setSelectedItem] = useState({})
 
     return(
-        <div className="lookup-input">
+        <div className="lookup-input" onClick={() => {
+            onActive(null)
+            setResults([])
+        }}>
+
+        <span className="lookup-input-background">
             <input 
             placeholder="Enter item name e.g. במבה"
+            type="search"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => handleLookupSubmit(e, inputValue, setResults)}
             />
-            { renderLookupButton(inputValue, onSubmit, setResults, setSelectedItem)}
+                {renderClearQuery(inputValue, setInputValue)}
+            </span>
         </div>
     )
 }

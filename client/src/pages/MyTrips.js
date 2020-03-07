@@ -11,14 +11,13 @@ const MyTrips = () => {
     const [filter, setFilter]= useState('')
     const {isShowing, toggle} = useModal()
     const [tripName, setTripName] = useState('')
-    const trips = unfilteredTrips.filter(trip => trip.name.toLowerCase().includes(filter.toLowerCase()))
+    const trips = unfilteredTrips.filter(trip => trip.name && trip.name.toLowerCase().includes(filter.toLowerCase()))
     const labels = {
         pageTitle: 'My Trips',
         newTripText: 'New Trip',
         modalTitle: 'New Trip'
     }
-    console.log(filter)
-    console.log(trips)
+
     return(
         <React.Fragment>
 

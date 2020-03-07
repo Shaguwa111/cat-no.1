@@ -589,25 +589,39 @@ footer {
     cursor: pointer;
 }
 
-.lookup-input input {
-    font-size: 16px;
-    margin-right: 15px;
-    color: white;
-    width: 25%;
-    line-height: 1.5;
-    padding: 15px 10px;
-    border: 1px solid #212f3d;
-    background: #212f3d;
-    border-radius: 4px;
-    transition: 0.2s;
+.clear-query {
+    height: 25px;
+    width: 25px;
 }
 
-.lookup-input input:focus {
-    transform: scale(1.04);
+.clear-query:hover * {
+    stroke: #1baeae !important;
+    cursor: pointer;
+}
+
+.lookup-input input {
+    color: #212f3d;
+    font-size: 100%;
+    width: 90%;
+    line-height: 1.5;
+    padding: 15px 10px;
+    border: none;
+}
+
+.lookup-input-background {
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    background: white;
+    transition: ease 0.2s;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .lookup-input input::placeholder {
-    color: white;
+    color: #212f3d;
     opacity: 1;
 }
 
@@ -618,17 +632,102 @@ footer {
     display: grid;
     justify-items: start;
     align-content: start;
+    align-self: center;
     grid-template-columns: repeat(5, 1fr);
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.lookup-result {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lookup-details-container {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.lookup-details-inner {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.lookup-img {
+    margin-bottom: 30px;
+}
+
+.lookup-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 70%;
+}
+
+.lookup-data-labels {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+.lookup-result-button {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+}
+
+.lookup-button {
+    display: inline-block;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 9px 25px;
+    background-color: #212f3d;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+}
+
+.lookup-button:hover {
+    transform: scale(1.04);
+    cursor: pointer;
+    background-color: #1baeae;
+}
+
+.search-helper {
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    color: #bbb;
+    margin-top: 100px;
+    z-index: 999;
 }
 
 .item-tile {
     border-radius: 4px;
     height: 200px;
     width: 200px;
-    background-color: skyblue;
     transition: ease 0.2s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 }
 
 .item-tile:hover {
@@ -637,22 +736,41 @@ footer {
 }
 
 .item-tile-header {
+    font-size: 18px;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    background-color: #212f3d;
+}
+
+.item-tile-body {
+    flex: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .item-tile-body img {
-    flex: 3;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
     height: 100px;
 }
 
 .item-tile-details {
     flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
+
+.item-tile-bottom {
+    margin-top: 9px;
+}
+
+.tile-version {
+    font-weight: normal !important;
+}
+
 
 .demo-container {
     width: 85%;
@@ -1157,25 +1275,6 @@ footer {
     outline: none;
 }
 
-.lookup-input input {
-    font-size: 16px;
-    margin-right: 25px;
-    color: white;
-    width: 25%;
-    line-height: 1.5;
-    padding: 15px 10px;
-    border: 1px solid #212f3d;
-    background: #212f3d;
-    border-radius: 4px;
-    transition: 0.2s;
-
-}
-
-.lookup-input input::placeholder {
-    color: white;
-    opacity: 1;
-}
-
 .auto-complete ul {
     list-style-type: none;
     display:inline-block;
@@ -1239,6 +1338,27 @@ footer {
     justify-content: flex-start;
     flex-direction: column;
     opacity: 1;
+}
+
+.lookup-modal {
+    z-index: 100;
+    background: white;
+    position: relative;
+    margin: 1.75rem auto;
+    border-radius: 4px;
+    width: 450px;
+    height: 500px;
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    opacity: 1;
+}
+
+.lookup-modal-header {
+    color: #bbb;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .modal-header {
@@ -1360,4 +1480,72 @@ footer {
     cursor: pointer;
     transform: scale(1.05);
     border: 1px solid #1baeae;
+}
+
+.trend-tutorial {
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    color: #bbb;
+}
+
+.trend-tab {
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.tab-container {
+    height: 100%;
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.tab {
+    width: 90%;
+    color: white;
+    background-color: #bbb;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 15px 10px;
+    line-height: 1.5;
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    transition: ease 0.2s;
+    margin-bottom: 10px;
+}
+
+.tab:hover {
+    background-color:#1baeae;
+    cursor: pointer;
+    width: 100%;
+    /* box-shadow: 0 4px 2px -2px gray; */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
+}
+
+.trend-separator {
+    width: 3%;
+    border-right: 1px solid #bbb;
+    height: 85%;
+}
+
+.chart-container {
+    height: 500px;
+    width: 700px;
+}
+
+.trend-data {
+    height: 100%;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
