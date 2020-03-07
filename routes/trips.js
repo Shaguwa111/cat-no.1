@@ -5,16 +5,8 @@ const utils = require('./utils/utils');
 
 const firebase = require('firebase');
 
-const config = {
-    apiKey: "AIzaSyBht451wsFWpTxs6rcZQpz-LidUFTd-hXU",
-    databaseURL: "https://tealdeal.firebaseio.com",
-}
-
-firebase.initializeApp(config);
 
 const db = firebase.database();
-
-
 
 
 const tripRouter = express.Router();
@@ -24,9 +16,9 @@ const itemSchema = {
         name: { type: 'string' },
         price: { type: 'number' },
         quantity: { type: 'number' },
-        img: { type: 'string'},
-        size: { type: 'string'}
-    }, required: ['name', 'price', 'size', 'quantity', 'img']
+        img: { type: ['string', 'null']},
+        size: { type: ['string', 'null']}
+    }, required: ['name', 'price', 'quantity', 'img']
 };
 
 
