@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchTrips } from '../../../state/actions'
+import { fetchTrips, fetchTrends } from '../../../state/actions'
 import { calculateTotal } from '../helpers'
 
 //*Toggle modal on and off
@@ -20,13 +20,13 @@ export const useModal = () => {
 //*Fetch all trips created by user
 export const useFetchTrips = () => {
     const dispatch = useDispatch()
-
+    const isSignedIn = useSelector(state => state.auth.isSignedIn)
     const trips = useSelector(state => state.trips)
 
     useEffect(() => {
-        dispatch(fetchTrips())
+        if (isSignedIn) dispatch(fetchTrips())
 
-    }, [dispatch])
+    }, [isSignedIn, dispatch])
 
     return trips
 }
@@ -65,4 +65,18 @@ export const useSummary = (id) => {
         vat,
         subTotal
     }
+}
+
+//*Return all tracked items for viewing on the trends page 
+export const useFetchTrends = () => {
+    const dispatch = useDispatch()
+
+    const trends = useSelector(state => state.trends)
+
+    useEffect(() => {
+        dispatch(fetchTrends())
+
+    }, [dispatch])
+
+    return trends
 }

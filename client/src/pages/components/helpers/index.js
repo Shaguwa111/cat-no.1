@@ -155,6 +155,11 @@ export const redirectToTrips = () => {
     history.push('/mytrips')
 }
 
+//*Redirect user to Trends page
+export const redirectToTrends = () => {
+    history.push('/trends')
+}
+
 //*Fetch search results from api for Lookup page
 export const fetchLookupResults = async (query, setResults) => {
     if (query.length > 1) {
@@ -202,28 +207,19 @@ export const renderSelectedItem = (item) => {
     )
 }
 
-export const displayTrendsTutorial = (length) => {
-    console.log(length)
-    if (length) {
+export const displayTrendsTutorial = (trends) => {
+    if (trends.length) {
         return <div className="trend-tutorial">Click on an item from the left side menu to display a trend!</div>
     }
     return <div className="trend-tutorial">You are not tracking any items. Sign in and lookup an item to get started!</div>
 }
 
-export const renderTrend = () => {
-    return(
-        <div className="chart-container">
-            <TrendChart/>
-        </div>
-    )
-}
-
-export const renderTabs = (items) => {
+export const renderTabs = (items, setSelectedTrend) => {
     if (!items) return null
-
+    console.log(items)
     return items.map((item) => {
         return(
-            <Tab item={item}/>
+            <Tab item={item} setSelectedTrend={setSelectedTrend}/>
         )
     })
 }

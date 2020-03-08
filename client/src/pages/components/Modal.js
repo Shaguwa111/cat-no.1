@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
 import GoogleAuth from './GoogleAuth'
@@ -23,7 +23,9 @@ const handleModalHeaderRender = (userAction) => {
             )
         case 'CHECKOUT': 
                 return(
-                    <div></div>
+                    <span className="modal-title">
+                        Checkout
+                    </span>
                 )
         case 'LOGIN_WARNING':
                 return(
@@ -38,7 +40,7 @@ const handleModalHeaderRender = (userAction) => {
     }
 }
 
-const handleModalBodyRender = (userAction, localState) => {
+const handleModalBodyRender = (userAction, localState, checkingOut, setCheckingOut) => {
     switch (userAction) {
         case 'DELETE_TRIP':
             return(
@@ -61,8 +63,19 @@ const handleModalBodyRender = (userAction, localState) => {
                 </React.Fragment>
             )
         case 'CHECKOUT': 
+                if (checkingOut) {
+                    return <span className="network-error">Network error. We are temporarily unable to process your request at the moment.</span>
+                }
                 return(
-                    <div></div>
+                    <div className="checkout-container">
+                        <button className="wolt-delivery" onClick={() => setCheckingOut(true)}>
+                            30 minute delivery with WOLT
+                        </button>
+                        <span className="or">- Or -</span>
+                        <button className="pick-up">
+                            Pick up at store
+                        </button>
+                    </div>
                 )
         case 'LOGIN_WARNING':
                 return(
@@ -130,6 +143,7 @@ const handleModalFooterRender = (userAction, hide, onSubmit, localState, dispatc
 
 const Modal = ({ isShowing, hide, userAction, onSubmit, localState, extraInfo }) => {
     const dispatch = useDispatch()
+    const [checkingOut, setCheckingOut] = useState(false)
 
     if (isShowing) {
         return ReactDOM.createPortal(
@@ -141,7 +155,7 @@ const Modal = ({ isShowing, hide, userAction, onSubmit, localState, extraInfo })
                                 {handleModalHeaderRender(userAction)}
                             </div>
                             <div className="modal-body">
-                                {handleModalBodyRender(userAction, localState)}
+                                {handleModalBodyRender(userAction, localState, checkingOut, setCheckingOut)}
                             </div>
                             <div className="modal-footer">
                                 {handleModalFooterRender(userAction, hide, onSubmit, localState, dispatch, extraInfo)}
