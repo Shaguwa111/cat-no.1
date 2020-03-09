@@ -1,55 +1,55 @@
-import React, { PureComponent} from 'react'
+import React from 'react'
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-const data = [
-    {
-        id: 'Item',
-        color: 'hsl(180, 73%, 39%)',
-        data: [
-            {
-                x: 1,
-                y: Math.floor(Math.random() * 10)
-            },
-            {
-                x: 2,
-                y: Math.floor(Math.random() * 10)
-            },
-            {
-                x: 3,
-                y: Math.floor(Math.random() * 10)
-            },
-            {
-                x: 4,
-                y: Math.floor(Math.random() * 10)
-            },
-            {
-                x: 5,
-                y: Math.floor(Math.random() * 10)
-            }
-        ]
-    }
-]
+const mutatePrice = (num) => {
+    const base = Math.abs(num / 10)
+    const rps = (Math.floor(Math.random() * 3) + 1)
 
-const TrendChart = () => {
+    if (rps > 1) {
+        return num + base
+    } else {
+        return num - (Math.floor(Math.random() * base))
+    }
+}
+const renderName = (num) => {
+    return 'Month ' + num
+}
+
+const priceTrackAlgorithm = (price, timespan) => {
+    const prices = []
+    let priceRef = price
+
+    for (let i = 1; i < timespan; i ++) {
+        const mutatedPrice = mutatePrice(priceRef)
+        prices.push({
+            name: renderName(i),
+            price: mutatedPrice.toFixed(2)
+        })
+        priceRef = mutatedPrice
+    }
+
+    return prices
+}
+
+const TrendChart = ({item}) => {
     return(
-        <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-            top: 5, right: 30, left: 20, bottom: 5,
-            }}
-        >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-      </LineChart>
+        <ResponsiveContainer height="100%" width="100%">
+            <LineChart
+                data={priceTrackAlgorithm(item.price, 7)}
+                margin={{
+                top: 5, right: 30, left: 20, bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="price" stroke="#1baeae" activeDot={{ r: 8 }} />
+        </LineChart>
+      </ResponsiveContainer>
     )
 }
 

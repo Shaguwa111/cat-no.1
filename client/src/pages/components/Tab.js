@@ -2,8 +2,8 @@ import React from 'react'
 
 const Tab = ({ item, setSelectedTrend }) => {
     return(
-        <div className="tab" onClick={() => setSelectedTrend(item)}>
-            Item
+        <div key={item._id} className="tab" onClick={() => setSelectedTrend(item)}>
+            {item.name}
         </div>
     )
 }

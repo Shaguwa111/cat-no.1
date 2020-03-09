@@ -21,7 +21,7 @@ export const signOut = () => {
 
 export const fetchTrips = () => async dispatch => {
     const request = await API.get('/trip')
-
+    console.log('w')
     dispatch({ type: TYPES.FETCH_TRIPS, payload: request.data})
 }
 
@@ -66,6 +66,21 @@ export const deleteTrip = (tripID) => async dispatch => {
     dispatch({ type: TYPES.DELETE_TRIP, payload: request.data})
 }
 
+export const fetchTrends = () => async dispatch => {
+    const request = await API.get('/track')
+
+    dispatch({ type: TYPES.FETCH_TRENDS, payload: request.data})
+}
 export const trackItem = (item) => async dispatch => {
-    console.log(item)
+    const request = await API.post('/track', item)
+    const trackedItem = request.data.find(x => x.name === item.name)
+
+    history.push('/trends')
+    dispatch({ type: TYPES.TRACK_ITEM, payload: trackedItem})
+}
+
+export const removeTracker = (id) => async dispatch => {
+    const request = await API.delete(`/track/${id}`)
+
+    dispatch({ type: TYPES.REMOVE_TRACKER, payload: request.data })
 }

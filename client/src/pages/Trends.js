@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { displayTrendsTutorial, renderTrend, renderTabs } from './components/helpers'
+import { useFetchTrends } from './components/hooks'
+import TrendDataSection from './components/TrendDataSection'
 
 const Trends = () => {
-    const [trends, setTrends] = useState([{ name: 'Cornflakes' }])
+    const trends = useFetchTrends()
     const [selectedTrend, setSelectedTrend ]= useState(null)
 
     return(
@@ -19,7 +21,8 @@ const Trends = () => {
                         </div>
                         <div className="trend-separator"></div>
                         <div className="trend-data">
-                            { !trends.length ? displayTrendsTutorial(trends.length) : renderTrend() }
+                            {!selectedTrend ? displayTrendsTutorial(trends) : null}
+                            <TrendDataSection item={selectedTrend} setSelectedTrend={setSelectedTrend}/>
                         </div>
                     </div>
             </div>
