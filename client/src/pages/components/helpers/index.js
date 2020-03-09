@@ -140,9 +140,8 @@ export const displayPrice = (price, quantity) => {
 
 //*Render a filter message that reminds the user that a filter is in action
 export const renderFilterMessage = () => {
-    const message = 'NOTE: Filter is active'
 
-    return <div className="filter-warning-box">{message}</div>
+    return <div className="filter-warning-box">NOTE: Filter&nbsp;is&nbsp;active</div>
 }
 
 //*Redirect user to the trip they wish to view

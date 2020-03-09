@@ -27,7 +27,7 @@ const Header = () => {
                 userAction="LOGIN_WARNING"
             />
             <div className="menu">
-            <Link className="logo-section" to="/">
+            <Link className="logo-section" to="/"  onClick={closeMenu}>
                 <ion-icon name="rocket-sharp" style={{ width: '60px', height: '60px' }}></ion-icon>
                 <span className="logo-text">
                     {labels.logo}
