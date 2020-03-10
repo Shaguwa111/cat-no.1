@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
 import GoogleAuth from './GoogleAuth'
+import { ReactComponent as WoltSVG } from '../../resources/wolt.svg'
 
 const handleModalHeaderRender = (userAction) => {
     switch (userAction) {
@@ -64,17 +65,21 @@ const handleModalBodyRender = (userAction, localState, checkingOut, setCheckingO
             )
         case 'CHECKOUT': 
                 if (checkingOut) {
-                    return <span className="network-error">Network error. We are temporarily unable to process your request at the moment.</span>
+                    return <span className="network-error">
+                        <p>NETWORK ERROR:</p>
+                        <p>We are temporarily unable to process your request at this moment.</p>
+                    </span>
                 }
                 return(
                     <div className="checkout-container">
-                        <button className="wolt-delivery" onClick={() => setCheckingOut(true)}>
-                            30 minute delivery with WOLT
-                        </button>
+                        <span className="wolt-delivery checkout-button" onClick={() => setCheckingOut(true)}>
+                            30 minute delivery with
+                            <WoltSVG className="wolt-logo"/>
+                        </span> 
                         <span className="or">- Or -</span>
-                        <button className="pick-up">
+                        <span className="pick-up checkout-button" onClick={() => setCheckingOut(true)}>
                             Pick up at store
-                        </button>
+                        </span>
                     </div>
                 )
         case 'LOGIN_WARNING':

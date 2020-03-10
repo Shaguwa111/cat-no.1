@@ -129,6 +129,7 @@ ul li a:focus {
 
 button:hover {
     background-color: #1baeae;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
 
 .menu-container {
@@ -263,11 +264,12 @@ footer {
     border: 1px solid #212f3d;
     background: #212f3d;
     border-radius: 4px;
-    transition: 0.2s;
+    transition: ease 0.2s;
 }
 
 .mytrips-search:focus {
-    transform: scale(1.04)
+    transform: scale(1.04);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
 
 .mytrips-search::placeholder {
@@ -602,6 +604,7 @@ footer {
 .clear-query {
     height: 25px;
     width: 25px;
+    margin-right: 5px;
 }
 
 .clear-query:hover * {
@@ -616,14 +619,18 @@ footer {
     line-height: 1.5;
     padding: 15px 10px;
     border: none;
+    border-radius: 4px;
+    outline: none;
 }
 
 .lookup-input-background {
+    color: #212f3d;
     border-radius: 4px;
     border: 1px solid #bbb;
     background: white;
     transition: ease 0.2s;
     width: 30%;
+    min-width: 230px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -718,6 +725,7 @@ footer {
     transform: scale(1.04);
     cursor: pointer;
     background-color: #1baeae;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
 
 .search-helper {
@@ -990,10 +998,12 @@ footer {
 
 .delete:hover {
     background-color: #f44336;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
 
 .order:hover {
     background-color: #1baeae;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
 
 .trip-savings {
@@ -1274,6 +1284,25 @@ footer {
     font-family: arial;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.73);
+    position: relative;
+}
+
+.clear-search {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    top: 23px;
+    right: 5px;
+    margin-left: auto;
+    margin-bottom: auto;
+}
+
+.clear-search:hover * {
+    stroke: #1baeae !important;
+    cursor: pointer;
 }
 
 .auto-complete input {
@@ -1285,15 +1314,14 @@ footer {
     border-radius: 4px;
     transition: 0.2s;
     margin: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
     border: none;
     box-sizing: border-box;
     outline: none;
 }
 
-<<<<<<< HEAD
-.lookup-input input {
+/* .lookup-input input {
     font-size: 16px;
     margin-right: 25px;
     color: white;
@@ -1309,10 +1337,8 @@ footer {
 .lookup-input input::placeholder {
     color: white;
     opacity: 1;
-}
+} */
 
-=======
->>>>>>> df491b13512096bbf090646cd22977a861c293f1
 .auto-complete ul {
     list-style-type: none;
     display: inline-block;
@@ -1450,6 +1476,7 @@ footer {
 
 .sign-out:hover {
     background-color: #f44336 !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
 
 .filter-warning-box {
@@ -1566,15 +1593,14 @@ footer {
     margin-bottom: 10px;
 }
 
-.tab:hover {
+.tab:focus {
     background-color: #1baeae;
     cursor: pointer;
     width: 100%;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
 }
-
-.tab:focus {
-    background-color:#1baeae;
+.tab:hover {
+    background-color: #1baeae;
     cursor: pointer;
     width: 100%;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
@@ -1636,17 +1662,12 @@ footer {
     height: 100%;
     width: 75%;
     display: flex;
-<<<<<<< HEAD
-    justify-content: center;
-}
-
-=======
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding-right: 25px;
 }
->>>>>>> df491b13512096bbf090646cd22977a861c293f1
+
 .hamburger {
     display: none;
 }
@@ -1747,7 +1768,91 @@ footer {
     background-color: rgba(45, 45, 45, .1);
 }
 
+.network-error {
+    width: 90%;
+    height:75%;
+    background-color: #FFD300;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+    text-align: center;
+}
+
+.checkout-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.wolt-logo {
+    height: 40px;
+    width: 130px;
+}
+
+.wolt-delivery {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    width: 220px;
+    padding: 10px 15px;
+    background-color: #212f3d;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wolt-delivery:hover * {
+    fill: white;
+}
+
+.checkout-button:hover {
+    background-color: #1baeae;
+    cursor: pointer;
+    transform: scale(1.04);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
+}
+
+.pick-up {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    width: 220px;
+    padding: 10px 15px;
+    background-color: #212f3d;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 651px) {
+    .mytrips-content {
+        overflow-y: auto;
+    }
+    .lookup-results-grid {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-content: center;
+        width: auto
+    }
+
+.item-tile {
+    border: 1px #bbb solid;
+    margin: 10px;
+}
+
     .hamburger {
         display: inline-block;
         padding: 5px;
@@ -1865,11 +1970,9 @@ footer {
         height: 150px;
         text-align: center;
     }
-
     .page-container {
         overflow-y: auto;
     }
-
     /* ,content {
         overflow-y: auto;
     } */

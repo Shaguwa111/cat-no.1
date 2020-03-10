@@ -4,7 +4,6 @@ import API from '../../../api'
 import history from '../../History'
 import TripTile from '../TripTile'
 import ItemTile from '../ItemTile'
-import TrendChart from '../TrendChart'
 import Item from '../Item'
 import { ReactComponent as ClearQuerySVG } from '../../../resources/clear.svg'
 import LookupDetails from '../LookupDetails'
@@ -185,7 +184,7 @@ export const renderLookupResults = (results, setSelectedItem) => {
     })
 }
 
-//*Render Lookup search button depending on input
+//*Render on Lookup search button depending on input
 export const renderClearQuery = (query, setInputValue) => {
     if (query) {
         return(
@@ -195,6 +194,19 @@ export const renderClearQuery = (query, setInputValue) => {
     return null
 }
 
+//*Render on auto complete search depending on input
+export const renderClearSearch = (query, setInputValue, setSuggestions) => {
+    if (query) {
+        return(
+            <ClearQuerySVG className="clear-search" onClick={() => {
+                setInputValue('')
+                setSuggestions([])
+            }}/> 
+        )
+    }
+}
+
+//*Display a tutorial message to the user providing some direction
 export const displaySearchHelper = () => {
     return <div className="search-helper">Enter a query and press enter to search. Click on an item for more information.</div>
 }
@@ -206,6 +218,7 @@ export const renderSelectedItem = (item) => {
     )
 }
 
+//*Display a tutorial message to the user providing some direction
 export const displayTrendsTutorial = (trends) => {
     if (trends.length) {
         return <div className="trend-tutorial">Click on an item from the left side menu to display a trend!</div>
@@ -213,6 +226,7 @@ export const displayTrendsTutorial = (trends) => {
     return <div className="trend-tutorial">You are not tracking any items. Sign in and lookup an item to get started!</div>
 }
 
+//*Display the item tabs on Trends page
 export const renderTabs = (items, setSelectedTrend) => {
     if (!items) return null
     console.log(items)

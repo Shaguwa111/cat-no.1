@@ -13,7 +13,6 @@ const LookupInput = ({ setResults, onActive }) => {
         <span className="lookup-input-background">
             <input 
             placeholder="Enter item name e.g. במבה"
-            type="search"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => handleLookupSubmit(e, inputValue, setResults)}

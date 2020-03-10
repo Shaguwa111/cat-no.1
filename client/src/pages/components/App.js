@@ -25,10 +25,10 @@ const App = () => {
                     <Route path="/trip/:id" exact component={Trip}/>
                     <Route path="/lookup" exact component={Lookup}/>
                     <Route path="/trends" exact component={Trends}/>
+
                 </div>
-                <Footer/>
+            <Footer/>
             </div>
-            
 
         </Router>
     )
