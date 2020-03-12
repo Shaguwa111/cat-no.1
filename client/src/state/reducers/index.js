@@ -7,5 +7,4 @@ export default combineReducers({
     auth: authReducer,
     trips: tripsReducer,
     trends: trendsReducer
-}
-)
+})

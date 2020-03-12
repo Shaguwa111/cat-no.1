@@ -9,7 +9,7 @@ const ItemDetails = ({ selectedItem, setSelectedItem }) => {
         itemSize: 'Size: ',
         itemQuantity: 'Quantity: '
     }
-    console.log(selectedItem)
+
     if (!selectedItem) return null
 
     return(
@@ -23,9 +23,9 @@ const ItemDetails = ({ selectedItem, setSelectedItem }) => {
                     <span className="details-price details-item">
                         {labels.itemPrice}
                     </span>
-                    <span className="details-size details-item">
+                    {selectedItem.size && <span className="details-size details-item">
                         {labels.itemSize}
-                    </span>
+                    </span>}
                     <span className="details-quantity details-item">
                         {labels.itemQuantity}
                     </span>

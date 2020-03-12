@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { displayTrendsTutorial, renderTrend, renderTabs } from './components/helpers'
+import { displayTrendsTutorial,renderTabs } from './components/helpers'
 import { useFetchTrends } from './components/hooks'
 import TrendDataSection from './components/TrendDataSection'
 

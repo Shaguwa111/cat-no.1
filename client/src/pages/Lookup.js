@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { renderLookupResults, handleLookupSubmit, renderSelectedItem, displaySearchHelper } from './components/helpers'
+import React, { useState } from 'react'
+import { renderLookupResults, handleLookupSubmit, displaySearchHelper } from './components/helpers'
 import LookupInput from './components/LookupInput'
-import { ReactComponent as ArrowSVG } from '../resources/arrow.svg'
-import history from './History'
-import { useModal } from './components/hooks' 
 import LookupModal from './components/LookupModal'
 
 

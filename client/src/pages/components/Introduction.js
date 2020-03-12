@@ -10,29 +10,36 @@ const Introduction = () => {
                     <div className="intro-section-top">
                     </div>
                     <div className="intro-header">
-                        <span className="intro-section-subtext">My Trips</span>
+                        <span className="intro-section-subtext">
+                            My Trips
+                        </span>
                     </div>
                     <div className="intro-section">
                     <ListSVG className="intro-icon"/> 
                     <p className="intro-section-text">
-                    Create smart shopping lists that are guaranteed to always have the best prices</p>
+                        Create smart shopping lists that are guaranteed to always have the best prices
+                    </p>
                     </div>
                     <div className="intro-header">
-                        <span className="intro-section-subtext">Trends</span>
+                        <span className="intro-section-subtext">
+                            Trends
+                        </span>
                     </div>
                     <div className="intro-section">
                     <TrendSVG className="intro-icon"/>
                     <p className="intro-section-text">
-                    View market trends powered by machine learning and TensorFlowJS
+                        View market trends powered by machine learning and TensorFlowJS
                     </p>
                     </div>
                     <div className="intro-header">
-                        <span className="intro-section-subtext">Lookup</span>
+                        <span className="intro-section-subtext">
+                            Lookup
+                        </span>
                     </div>
                     <div className="intro-section">
                     <BarcodeSVG className="intro-icon"/>
                     <p className="intro-section-text-last">
-                    Search for individual items, find the lowest price and where to buy it!
+                        Search for individual items, find the lowest price and track it over time
                      </p>
                     </div>
                 </div>

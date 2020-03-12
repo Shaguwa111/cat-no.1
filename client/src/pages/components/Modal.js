@@ -31,8 +31,16 @@ const handleModalHeaderRender = (userAction) => {
         case 'LOGIN_WARNING':
                 return(
                     <React.Fragment>
-                        <span>
+                        <span className="modal-title">
                             NOTE
+                        </span>
+                    </React.Fragment>
+                )
+        case 'CONTACT':
+                return(
+                    <React.Fragment>
+                        <span className="modal-title">
+                            Contact
                         </span>
                     </React.Fragment>
                 )
@@ -64,20 +72,29 @@ const handleModalBodyRender = (userAction, localState, checkingOut, setCheckingO
                 </React.Fragment>
             )
         case 'CHECKOUT': 
-                if (checkingOut) {
-                    return <span className="network-error">
-                        <p>NETWORK ERROR:</p>
-                        <p>We are temporarily unable to process your request at this moment.</p>
-                    </span>
+                if (checkingOut === 2) {
+                    setTimeout(() => {
+                        setCheckingOut(3)
+                    }, 3000)
+                    return <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    
+                }
+                if (checkingOut === 3) {
+                    return( 
+                        <span className="network-error">
+                            <p>NETWORK ERROR:</p>
+                            <p>We are temporarily unable to process your request at this moment.</p>
+                        </span>
+                    )
                 }
                 return(
                     <div className="checkout-container">
-                        <span className="wolt-delivery checkout-button" onClick={() => setCheckingOut(true)}>
+                        <span className="wolt-delivery checkout-button" onClick={() => setCheckingOut(2)}>
                             30 minute delivery with
                             <WoltSVG className="wolt-logo"/>
                         </span> 
                         <span className="or">- Or -</span>
-                        <span className="pick-up checkout-button" onClick={() => setCheckingOut(true)}>
+                        <span className="pick-up checkout-button" onClick={() => setCheckingOut(2)}>
                             Pick up at store
                         </span>
                     </div>
@@ -90,6 +107,8 @@ const handleModalBodyRender = (userAction, localState, checkingOut, setCheckingO
                         </span>
                     </React.Fragment>
                 )
+        case 'CONTACT':
+            return <span className="modal-form-text">gsheinbein@gmail.com</span>
         default:
             return null
     }
@@ -148,7 +167,7 @@ const handleModalFooterRender = (userAction, hide, onSubmit, localState, dispatc
 
 const Modal = ({ isShowing, hide, userAction, onSubmit, localState, extraInfo }) => {
     const dispatch = useDispatch()
-    const [checkingOut, setCheckingOut] = useState(false)
+    const [checkingOut, setCheckingOut] = useState(1)
 
     if (isShowing) {
         return ReactDOM.createPortal(

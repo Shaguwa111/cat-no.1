@@ -131,8 +131,8 @@ export const displayLongString = (str) => {
 }
 
 //*Display price in correct format with correct value based on quantity
-export const displayPrice = (price, quantity) => {
-    const fixedPrice = (price * quantity).toFixed(2)
+export const displayPrice = (price, quantity, fixed = 2) => {
+    const fixedPrice = (price * quantity).toFixed(fixed)
 
     return '₪ ' + fixedPrice
 }
@@ -145,7 +145,7 @@ export const renderFilterMessage = () => {
 
 //*Redirect user to the trip they wish to view
 export const redirectToTrip = (id) => {
-    history.push('/trip/' + id)
+    history.push('/trips/' + id)
 }
 
 //*Redirect user to the My Trips page 

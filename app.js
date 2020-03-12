@@ -20,10 +20,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 firebase.initializeApp(config);
-// require('./victory');
-// require('ץ.tivtaam');
 
-//* rouets *//
+app.use(express.static('client/build'))
+
+//* routes *//
 const items = require('./routes/items');
 app.use('/item', items);
 
@@ -33,7 +33,9 @@ app.use('/trip', trips);
 const tracks = require('./routes/tracks');
 app.use('/track', tracks);
 
-
+app.all('*', (req,res) => {
+    res.sendFile('./client/public/index.html')
+})
 
 app.listen(PORT, () => {
     console.log(`up and runing on ${PORT}`);

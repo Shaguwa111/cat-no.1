@@ -1,7 +1,5 @@
 import React from 'react'
 import { displayLongString } from './helpers'
-import LookupModal from './LookupModal'
-import { useModal } from './hooks'
 
 const ItemTile = ({ item, setSelectedItem }) => {
 

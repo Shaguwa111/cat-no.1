@@ -1,15 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { useSummary } from './hooks'
-import { useModal } from './hooks'
-import { deleteTrip } from '../../state/actions'
-import Modal from './Modal'
 import TripDeleteButton from './TripDeleteButton'
 import TripOrderButton from './TripOrderButton'
 
 const TripSummary = ({ id }) => {
-    const {isShowing, toggle} = useModal()
-    const dispatch = useDispatch()
     const summary = useSummary(id)
     const labels = {
         vat: 'VAT: ',
@@ -21,7 +15,7 @@ const TripSummary = ({ id }) => {
 
     return(
         <div className="trip-summary">
-
+        <div className="trip-numbers">
             <div className="trip-totals labels">
                 <div className="total-vat">
                     {labels.vat}
@@ -43,6 +37,7 @@ const TripSummary = ({ id }) => {
                 <div className="total">
                     {`₪ ${summary.total}`}
                 </div>
+            </div>
             </div>
             <div className="trip-savings">
                 <TripDeleteButton tripId={id} />

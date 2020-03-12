@@ -29,7 +29,7 @@ export const createTrip = (name) => async dispatch => {
     const request = await API.post('/trip', {
         name
     })
-    history.push(`/trip/${request.data._id}`)
+    history.push(`/trips/${request.data._id}`)
 
     dispatch({ type: TYPES.CREATE_TRIP, payload: request.data})
 }

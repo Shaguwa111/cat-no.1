@@ -16,10 +16,19 @@ itemRouter.post('/lookup', utils.catchAsync(async (req, res) => { // POST {q: <s
         json: true
     }
 
+    const tivTaamSearchOptions = {
+        uri: `https://n2.nixale.com/q?customer=tivtaam&q=${encodeURIComponent(searchQuery)}`,
+        headers: {
+            'User-Agent': new userAgent().toString()
+        },
+        json: true
+    }
 
-    const results = (await rp(supersalSearchOptions)).results || [];
 
-    const formattedResults = results.map(r => ({
+   let formattedResults = [];
+const superPromise = async () => {
+ const results = (await rp(supersalSearchOptions)).results || [];
+     return results.map(r => ({
         name: r.name,
         description: r.description,
         price: r.price.value,
@@ -27,6 +36,24 @@ itemRouter.post('/lookup', utils.catchAsync(async (req, res) => { // POST {q: <s
         size: r.unitDescription,
         quantity: 1
     })).sort((a, b) => a.name > b.name ? 1 : -1);
+
+}
+
+const tivPromise = async () => {
+
+        const results = (await rp(tivTaamSearchOptions)).products || [];
+     return results.map(r => ({
+        name: r.highlight_name,
+        description: r.shortTitle,
+        price: Number(r.price.replace('₪', '')) || 12.90,
+        img: r.image,
+        size: null,
+        quantity: 1
+    })).sort((a, b) => a.name > b.name ? 1 : -1).splice(0, 10);
+}
+
+formattedResults = await Promise.race([superPromise(), tivPromise()]);
+   
 
     res.json(formattedResults);
 }));

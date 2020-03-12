@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { ReactComponent as RocketSVG } from '../../resources/rocket-sharp.svg'
 import { useModal } from './hooks'
 import { redirectToTrips } from './helpers'
 import Modal from './Modal'
@@ -28,7 +29,7 @@ const Header = () => {
             />
             <div className="menu">
             <Link className="logo-section" to="/"  onClick={closeMenu}>
-                <ion-icon name="rocket-sharp" style={{ width: '60px', height: '60px' }}></ion-icon>
+                <RocketSVG style={{ width: '60px', height: '60px' }}/>
                 <span className="logo-text">
                     {labels.logo}
                 </span>
@@ -41,9 +42,6 @@ const Header = () => {
             </div>
             <div className={"menu-dimmer" + (menuToggle ? " dim" : "")} onClick={closeMenu}> </div>
             <ul className={menuToggle ? "menu-open" : ""}>
-                {/* <li><Link  to="/">
-                    {labels.home}
-                </Link></li> */}
                 <li onClick={closeMenu}><Link to="/trends">
                     {labels.trends}
                 </Link></li>

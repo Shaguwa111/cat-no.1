@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 
- class Api {
+ class API {
      constructor () {
          this.userId = '';
      }
     
 get api () {
     return axios.create({
-        baseURL: 'http://localhost:8080',
+        baseURL: window.location.port === '3000' ? 'http://localhost:8080' : '/',
         headers: {'user-id': this.userId}
     });
 }
@@ -31,4 +31,4 @@ get delete () {
 }
 
 
-export default new Api(); 
+export default new API(); 

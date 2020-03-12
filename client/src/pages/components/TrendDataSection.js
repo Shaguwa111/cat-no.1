@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import TrendChart from './TrendChart'
 import { removeTracker } from '../../state/actions'
-import { displayTrendsTutorial } from './helpers'
 
 const TrendDataSection = ({item, setSelectedTrend}) => {
     const dispatch = useDispatch()

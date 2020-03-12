@@ -2,6 +2,7 @@ import React from 'react'
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
+import moment from 'moment'
 
 const mutatePrice = (num) => {
     const base = Math.abs(num / 10)
@@ -14,12 +15,19 @@ const mutatePrice = (num) => {
     }
 }
 const renderName = (num) => {
-    return 'Month ' + num
+    const currentDate = moment().subtract(num, 'M')
+
+    return num < 2 ? '1 month ago': currentDate.fromNow()
 }
 
 const priceTrackAlgorithm = (price, timespan) => {
     const prices = []
     let priceRef = price
+
+        prices.push({
+            name: 'Today',
+            price
+        })
 
     for (let i = 1; i < timespan; i ++) {
         const mutatedPrice = mutatePrice(priceRef)
@@ -34,10 +42,12 @@ const priceTrackAlgorithm = (price, timespan) => {
 }
 
 const TrendChart = ({item}) => {
+    const data = priceTrackAlgorithm(item.price, 6)
+
     return(
         <ResponsiveContainer height="100%" width="100%">
             <LineChart
-                data={priceTrackAlgorithm(item.price, 7)}
+                data={data}
                 margin={{
                 top: 5, right: 30, left: 20, bottom: 5,
                 }}

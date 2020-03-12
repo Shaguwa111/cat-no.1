@@ -10,7 +10,7 @@ const Item = ({item}) => {
     const { id }= useParams()
     const dispatch = useDispatch()
     const [quantity, setQuantity] = useState(item.quantity)
-    const labels = { removeItem: 'Remove' }
+    const labels = { removeItem: window.innerWidth > 651 ? 'Remove' : 'X'}
 
     if (quantity < 1) {
         dispatch(removeItem(id, item._id))
@@ -26,7 +26,7 @@ const Item = ({item}) => {
                     {displayLongString(item.size)}
                 </span>
                 <span className="list-price">
-                    {displayPrice(item.price, item.quantity)}
+                    {displayPrice(item.price, item.quantity, 0)}
                 </span>
                 <span className="quantity-select">
                 <MinusSignSVG className="plusminus minus" onClick={() => {
